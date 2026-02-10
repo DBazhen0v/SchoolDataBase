@@ -1,5 +1,5 @@
 import csv
-
+import json
 with open("config.txt" , "r", encoding="utf-8") as f:
     min = int(f.read())
 
@@ -26,3 +26,13 @@ with open("retest.csv", "w", newline="", encoding="utf-8") as f:
     writer.writeheader()
     for i in retest:
         writer.writerow(i)
+
+
+list2 = []
+for i in list:
+    if i["score"]>= min:
+        i["pass"] = True
+        list2.append( i)
+
+with open("best_students.json", "w", encoding="utf-8") as f:
+    json.dump(list2,f, indent=4, ensure_ascii=False)
